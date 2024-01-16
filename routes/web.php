@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnimeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 
@@ -15,15 +16,7 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', [HomeController::class, 'index']);
-
-Route::get('/anime/{id}', [HomeController::class, 'show'])->name('anime.details');
-
-
-Route::get('/anime-details', function () {
-    return view('anime-details');
-});
-Route::get('/animlist', function () {
-    return view('animlist');
-});
+Route::get('/anim/{category}', [AnimeController::class, 'showAll'])->name('show.all');
+Route::get('/anime/{id}', [AnimeController::class, 'details'])->name('anime.details');
 
 

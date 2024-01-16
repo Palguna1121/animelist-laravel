@@ -2,29 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ApiDataFetcher;
+use App\Models\HomeModels;
+use Illuminate\Routing\Controller;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $heroData = ApiDataFetcher::fetchData('top/anime', ['limit' => 5]);
-        $seasonNowData = ApiDataFetcher::fetchData('seasons/now', ['limit' => 6]);
-        $seasonUpcomingData = ApiDataFetcher::fetchData('seasons/upcoming', ['limit' => 6]);
-        $reproducedData = ApiDataFetcher::getNestedAnimeResponses('recommendations/anime', 'entry', 5);
+        $page = $request->query('page', 1);
+        $trending = HomeModels::fetchTrendingAnime(10, $page);
+        $popular = HomeModels::fetchPopularAnime(6, $page);
+        $fav = HomeModels::fetchFavAnime(6, $page);
+        $top100 = HomeModels::fetchTop100Anime(5, $page);
+        $nullbg = env('NULL_BG');
 
         return view('home', [
-            'heroData' => $heroData,
-            'seasonNowData' => $seasonNowData,
-            'seasonUpcomingData' => $seasonUpcomingData,
-            'reproducedData' => $reproducedData,
+            'trending' => $trending,
+            'popular' => $popular,
+            'fav' => $fav,
+            'top100' => $top100,
+            'nullbg' => $nullbg,
         ]);
     }
 
-    public function show($id)
-    {
-        $anime = ApiDataFetcher::fetchData(`anime/$id`);
-
-        return view('anime-details', ['anime' => $anime]);
-    }
+   
 }

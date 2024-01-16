@@ -25,7 +25,7 @@
             <script>
               document.write(new Date().getFullYear());
             </script>
-            All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+            All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://instagram.com/palguna._28" target="_blank">Instagram</a>
           </p>
         </div>
       </div>

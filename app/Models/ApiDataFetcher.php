@@ -24,6 +24,23 @@ class ApiDataFetcher extends Model
         }
     }
 
+    public static function fetchDataNew($resource, $queryParams = [])
+    {
+        $apiUrl = env('BASE_URL') . '/' . $resource;
+
+        if (!empty($queryParams)) {
+            $apiUrl .= '?' . http_build_query($queryParams);
+        }
+
+        $response = Http::withOptions(['verify' => false])->get($apiUrl);
+
+        if ($response->successful()) {
+            return json_decode($response, true);
+        } else {
+            return null;
+        }
+    }
+
     public static function getNestedAnimeResponses($resource, $objectProp, $gap)
     {
         $apiUrl = env('API_URL') . '/' . $resource;
