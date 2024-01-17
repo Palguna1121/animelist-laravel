@@ -4,24 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use GuzzleHttp\Client;
+use app\Helpers\GraphQLHelper;
 
 class HomeModels extends Model
 {
-    private static function sendGraphQLRequest($query, $variables = [])
-    {
-        $http = new Client;
-        $response = $http->post(env('ANIME_URL'), [
-            'json' => [
-                'query' => $query,
-                'variables' => $variables,
-            ]
-        ]);
-
-        $data = json_decode($response->getBody(), true);
-
-        return $data['data'];
-    }
-
     public static function fetchTrendingAnime($limit, $page)
     {
         $query = 'query($perPage: Int, $page: Int) {
@@ -56,7 +42,9 @@ class HomeModels extends Model
             }
         }';
 
-        return self::sendGraphQLRequest($query,  ['perPage' => $limit, 'page' => $page]);
+        $result = sendGraphQLRequest($query,  ['perPage' => $limit, 'page' => $page]);
+
+        return $result;
     }
 
     public static function fetchPopularAnime($limit, $page)
@@ -95,7 +83,9 @@ class HomeModels extends Model
         }
         GRAPHQL;
 
-        return self::sendGraphQLRequest($query,  ['perPage' => $limit, 'page' => $page]);
+        $result = sendGraphQLRequest($query,  ['perPage' => $limit, 'page' => $page]);
+
+        return $result;
     }
 
     public static function fetchFavAnime($limit, $page)
@@ -134,7 +124,9 @@ class HomeModels extends Model
         }
         GRAPHQL;
 
-        return self::sendGraphQLRequest($query,  ['perPage' => $limit, 'page' => $page]);
+        $result = sendGraphQLRequest($query,  ['perPage' => $limit, 'page' => $page]);
+
+        return $result;
     }
 
     public static function fetchTop100Anime($limit, $page)
@@ -172,8 +164,10 @@ class HomeModels extends Model
             }
         }
         GRAPHQL;
-        
-        return self::sendGraphQLRequest($query,  ['perPage' => $limit, 'page' => $page]);
+
+        $result = sendGraphQLRequest($query,  ['perPage' => $limit, 'page' => $page]);
+
+        return $result;
     }
 
 }

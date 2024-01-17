@@ -3,25 +3,11 @@
 namespace App\Models;
 
 use GuzzleHttp\Client;
+use app\Helpers\GraphQLHelper;
 use Illuminate\Database\Eloquent\Model;
 
 class AnimeModels extends Model
 {
-    private static function sendGraphQLRequest($query, $variables = [])
-    {
-        $http = new Client;
-        $response = $http->post(env('ANIME_URL'), [
-            'json' => [
-                'query' => $query,
-                'variables' => $variables,
-            ]
-        ]);
-
-        $data = json_decode($response->getBody(), true);
-
-        return $data['data'];
-    }
-    
     public static function fetchAnimeById($id)
     {
         $query = <<<GRAPHQL
@@ -83,7 +69,9 @@ class AnimeModels extends Model
         }
         GRAPHQL;
 
-        return self::sendGraphQLRequest($query, ['id' => $id]);
+        $result = sendGraphQLRequest($query, ['id' => $id]);
+
+        return $result;
     }
 
     public static function fetchAnimeByCategory($category, $limit, $page)
@@ -140,6 +128,8 @@ class AnimeModels extends Model
             }
             GRAPHQL;
 
-        return self::sendGraphQLRequest($query, ['perPage' => $limit, 'page' => $page]);
+        $result = sendGraphQLRequest($query, ['perPage' => $limit, 'page' => $page]);
+
+        return $result;
     }
 }
