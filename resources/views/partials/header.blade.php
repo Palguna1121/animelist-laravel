@@ -14,17 +14,14 @@
               <ul>
                 <li class="active"><a href="/">Homepage</a></li>
                 <li>
-                  <a href="#">Categories <span class="arrow_carrot-down"></span></a>
+                  <a>Categories <span class="arrow_carrot-down"></span></a>
                   <ul class="dropdown">
-                    <li><a href="#">Categories</a></li>
-                    <li><a href="/anime-details">Anime Details</a></li>
-                    <li><a href="#">Anime Watching</a></li>
-                    <li><a href="#">Blog Details</a></li>
-                    <li><a href="#">Sign Up</a></li>
-                    <li><a href="#">Login</a></li>
+                    <li><a href="{{ route('show.all', ['category' => 'trending']) }}">Trending</a></li>
+                    <li><a href="{{ route('show.all', ['category' => 'favourites']) }}">Favourites</a></li>
+                    <li><a href="{{ route('show.all', ['category' => 'popular']) }}">Popular</a></li>
                   </ul>
                 </li>
-                <li><a href="#">Our Blog</a></li>
+                <li><a href="#">My Anime</a></li>
                 <li><a href="#">Contacts</a></li>
               </ul>
             </nav>

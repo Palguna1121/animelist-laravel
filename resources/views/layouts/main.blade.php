@@ -37,12 +37,15 @@
     <div class="search-model">
       <div class="h-100 d-flex align-items-center justify-content-center">
         <div class="search-close-switch"><i class="icon_close"></i></div>
-        <form class="search-model-form">
-          <input type="text" id="search-input" placeholder="Search here....." />
+        <form action="{{ route('anime.search') }}" method="GET" class="search-model-form" id="searchForm">
+          <input type="text" name="searchTerm" id="search-input" type="submit" placeholder="Search here....." />
         </form>
       </div>
     </div>
 
+
+
+    <script src="js/search.js"></script>
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/player.js"></script>

@@ -8,33 +8,38 @@
         <div class="hero__slider owl-carousel">
           @foreach($trending['Page']['media'] as $hero)
             @if (isset($hero['bannerImage']))
-              <div class="hero__items set-bg" data-setbg="{{ $hero['bannerImage'] }}">
+              <div class="hero__items set-bg" data-setbg="{{ $hero['bannerImage'] }}" style="position: relative;">
+                <div class="overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.2);"></div>
                 <div class="row">
-                    <div class="col-lg-6">
-                        <div class="hero__text">
-                            <div class="label">{{ $hero['type'] }}</div>
-                            <h2>{{ substr($hero['title']['romaji'], 0, 20) }}...</h2>
-                            <p>{{ substr($hero['description'], 0, 100) }}...</p>
-                            <a href="{{ route('anime.details', ['id' => $hero['idMal']]) }}"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
-                          </div>
-                      </div>
+                  <div class="col-lg-6">
+                    <div class="hero__text">
+                      <div class="label">{{ $hero['type'] }}</div>
+                      <h2>{{ substr($hero['title']['romaji'], 0, 20) }}...</h2>
+                      <p>{!! substr(strip_tags($hero['description']), 0, 100) !!}...</p>
+                      <a href="{{ route('anime.details', ['id' => $hero['idMal']]) }}" class="mr-4 rounded-full"><span>Details</span></a>
+                      <a href="{{ route('anime.details', ['id' => $hero['idMal']]) }}"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
+                    </div>
                   </div>
+                </div>
               </div>
             @else
-              <div class="hero__items set-bg" data-setbg="{{ $nullbg }}">
+              <div class="hero__items set-bg" data-setbg="{{ $nullbg }}" style="position: relative;">
+                <div class="overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.2);"></div>
                 <div class="row">
-                    <div class="col-lg-6">
-                        <div class="hero__text">
-                            <div class="label">{{ $hero['type'] }}</div>
-                            <h2>{{ substr($hero['title']['romaji'], 0, 20) }}</h2>
-                            <p>{{ substr($hero['description'], 0, 100) }}...</p>
-                            <a href="{{ route('anime.details', ['id' => $hero['idMal']]) }}"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
-                          </div>
-                      </div>
+                  <div class="col-lg-6">
+                    <div class="hero__text">
+                      <div class="label">{{ $hero['type'] }}</div>
+                      <h2>{{ substr($hero['title']['romaji'], 0, 20) }}</h2>
+                      <p>{!! substr(strip_tags($hero['description']), 0, 100) !!}...</p>
+                      <a href="{{ route('anime.details', ['id' => $hero['idMal']]) }}" class="mr-4 rounded-full"><span>Details</span></a>
+                      <a href="{{ route('anime.details', ['id' => $hero['idMal']]) }}"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
+                    </div>
                   </div>
+                </div>
               </div>
             @endif
           @endforeach
+
         </div>
       </div>
     </section>
@@ -62,13 +67,13 @@
                 <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="product__item">
                         <div class="product__item__pic set-bg hero__items" data-setbg="{{ $pop['coverImage']['large'] }}">
-                          @if (isset($pop['episodes']))
-                            <div class="ep">{{ $pop['episodes'] }}</div>
-                          @else
-                            <div class="ep">-</div>
-                          @endif  
-                            <div class="comment"><i class="fa fa-comments"></i> {{ $pop['favourites'] }}</div>
-                            <div class="view"><i class="fa fa-eye"></i> {{ $pop['popularity'] }}</div>
+                            @if (isset($pop['episodes']))
+                              <div class="ep">{{ $pop['episodes'] }}</div>
+                            @else
+                              <div class="ep">-</div>
+                            @endif  
+                              <div class="comment"><i class="fa fa-comments"></i> {{ $pop['favourites'] }}</div>
+                              <div class="view"><i class="fa fa-eye"></i> {{ $pop['popularity'] }}</div>
                         </div>
                         <div class="product__item__text">
                             <ul>
@@ -130,7 +135,7 @@
 
             <div class="product__sidebar__view">
               <div class="section-title">
-                <h5>Top Views</h5>
+                <h5>Trending</h5>
               </div>
               {{-- <ul class="filter__controls">
                   <li class="active" data-filter="all">All</li>
@@ -172,7 +177,7 @@
 
             <div class="product__sidebar__comment">
               <div class="section-title">
-                <h5>Trending Anime</h5>
+                <h5>Top Views</h5>
               </div>
 
                 @foreach ($top100['Page']['media'] as $top)

@@ -29,7 +29,7 @@
                                 </div>
                                 <span>{{ $anime['meanScore'] }}/100</span>
                             </div>
-                            <p>{{ $anime['description'] }}</p>
+                            <p>{!! strip_tags($anime['description']) !!}</p>
                             <div class="anime__details__widget">
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6">
@@ -39,9 +39,13 @@
                                                 {{ formatDate($anime['startDate']) }} to {{ formatDate($anime['endDate']) }}
                                             </li>
                                             <li><span>Genre:</span>
-                                                @foreach ($anime['genres'] as $genre)
+                                                @foreach ($anime['genres'] as $key => $genre)
                                                     {{ $genre }}
+                                                    @if (!$loop->last)
+                                                        ,
+                                                    @endif
                                                 @endforeach
+
                                             </li>
                                         </ul>
                                     </div>
@@ -52,6 +56,9 @@
                                             <li><span>Studios:</span>
                                                 @foreach ($anime['studios']['nodes'] as  $namestudio)
                                                     {{ $namestudio['name'] }}
+                                                    @if (!$loop->last)
+                                                        ,
+                                                    @endif
                                                 @endforeach
                                             </li>
                                         </ul>
@@ -59,7 +66,8 @@
                                 </div>
                             </div>
                             <div class="anime__details__btn">
-                                <a href="#" class="follow-btn"><i class="fa fa-heart-o"></i> Follow</a>
+                                <a class="follow-btn"><i class="fa fa-heart-o"></i> Like & Save</a>
+                                <a class="follow-btn"><i class="fa fa-heart"></i> Like & Save</a>
                                 <a href="#" class="watch-btn"><span>Watch Now</span> <i
                                     class="fa fa-angle-right"></i></a>
                                 </div>
@@ -102,28 +110,19 @@
                     <div class="col-lg-4 col-md-4">
                         <div class="anime__details__sidebar">
                             <div class="section-title">
-                                <h5>you might like...</h5>
+                                <h5>Popular now</h5>
                             </div>
-                            <div class="product__sidebar__view__item set-bg" data-setbg="img/sidebar/tv-1.jpg">
-                                <div class="ep">18 / ?</div>
-                                <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                <h5><a href="#">Boruto: Naruto next generations</a></h5>
-                            </div>
-                            <div class="product__sidebar__view__item set-bg" data-setbg="img/sidebar/tv-2.jpg">
-                                <div class="ep">18 / ?</div>
-                                <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
-                            </div>
-                            <div class="product__sidebar__view__item set-bg" data-setbg="img/sidebar/tv-3.jpg">
-                                <div class="ep">18 / ?</div>
-                                <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                <h5><a href="#">Sword art online alicization war of underworld</a></h5>
-                            </div>
-                            <div class="product__sidebar__view__item set-bg" data-setbg="img/sidebar/tv-4.jpg">
-                                <div class="ep">18 / ?</div>
-                                <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                <h5><a href="#">Fate/stay night: Heaven's Feel I. presage flower</a></h5>
-                            </div>
+                            @foreach ($popular['Page']['media'] as $pop) 
+                                    <div class="product__sidebar__view__item set-bg" data-setbg={{ $pop['coverImage']['large'] }}>
+                                        @if (isset($pop['episodes']))
+                                            <div class="ep">{{ $pop['episodes'] }}</div>
+                                        @else
+                                            <div class="ep">-</div>
+                                        @endif  
+                                        <div class="view"><i class="fa fa-eye"></i> {{ $pop['popularity'] }}</div>
+                                        <h5><a href="{{ route('anime.details', ['id' => $pop['idMal']]) }}">{{ $pop['title']['romaji'] }}</a></h5>
+                                    </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

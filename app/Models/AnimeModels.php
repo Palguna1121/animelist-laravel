@@ -132,4 +132,6 @@ class AnimeModels extends Model
 
         return $result;
     }
+
+
 }

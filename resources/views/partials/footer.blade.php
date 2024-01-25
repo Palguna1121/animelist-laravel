@@ -13,8 +13,7 @@
           <div class="footer__nav">
             <ul>
               <li class="active"><a href="/">Homepage</a></li>
-              <li><a href="#">Categories</a></li>
-              <li><a href="#">Our Blog</a></li>
+              <li><a href="#">My Anime</a></li>
               <li><a href="#">Contacts</a></li>
             </ul>
           </div>
@@ -25,7 +24,7 @@
             <script>
               document.write(new Date().getFullYear());
             </script>
-            All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://instagram.com/palguna._28" target="_blank">Instagram</a>
+            All rights reserved | This is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://instagram.com/palguna._28" target="_blank">Palguna</a>
           </p>
         </div>
       </div>
